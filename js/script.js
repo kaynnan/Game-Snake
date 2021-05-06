@@ -51,7 +51,7 @@ function startGame() {
     for (i = 1; i < snake.length; i++) {
         if (snake[0].x == snake[i].x && snake[0].y == snake[i].y) {
             clearInterval(game);
-            alert('Game Over :(');
+            alert('Game Over');
         }
     }
 
@@ -67,7 +67,12 @@ function startGame() {
     if (direct == "up") snakeY += box;
     if (direct == "down") snakeY -= box;
 
-    snake.pop();
+    if (snakeX != food.x || snakeY != food.y) {
+        snake.pop();
+    } else {
+        food.x = Math.floor(Math.random() * 15 + 1) * box;
+        food.y = Math.floor(Math.random() * 15 + 1) * box;
+    }
 
     let newHD = {
         x: snakeX,
